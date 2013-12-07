@@ -6,7 +6,7 @@
 # catalog-version 1.1
 Name:		texlive-spot
 Version:	1.1
-Release:	5
+Release:	6
 Summary:	Spotlight highlighting for Beamer
 Group:		Publishing
 URL:		http://www.ctan.org/tex-archive/macros/latex/contrib/beamer-contrib/spot
