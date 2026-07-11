@@ -1,48 +1,23 @@
-Name:		texlive-spot
-Version:	22408
-Release:	2
+%global tl_name spot
+%global tl_revision 22408
+
+Name:		texlive-%{tl_name}
+Epoch:		1
+Version:	1.1
+Release:	%{tl_revision}.1
 Summary:	Spotlight highlighting for Beamer
 Group:		Publishing
 URL:		https://www.ctan.org/tex-archive/macros/latex/contrib/beamer-contrib/spot
-License:	LPPL1.3
-Source0:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/spot.r%{version}.tar.xz
-Source1:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/spot.doc.r%{version}.tar.xz
-Source2:	http://mirrors.ctan.org/systems/texlive/tlnet/archive/spot.source.r%{version}.tar.xz
+License:	lppl1.3
+Source0:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/spot.r%{tl_revision}.tar.xz
+Source1:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/spot.doc.r%{tl_revision}.tar.xz
+Source2:	https://mirrors.ctan.org/systems/texlive/tlnet/archive/spot.source.r%{tl_revision}.tar.xz
 BuildArch:	noarch
-BuildRequires:	texlive-tlpkg
-Requires(pre):	texlive-tlpkg
-Requires(post):	texlive-kpathsea
+BuildSystem:	texlive
+Provides:	texlive(%{tl_name}) = %{tl_revision}
 
 %description
-The package allows dramatic highlighting of words and phrases
-by painting shapes around them. It is chiefly intended for use
-in Beamer presentations, but it can be used in other document
-classes as well.
+The package allows dramatic highlighting of words and phrases by
+painting shapes around them. It is chiefly intended for use in Beamer
+presentations, but it can be used in other document classes as well.
 
-%post
-%{_sbindir}/texlive.post
-
-%postun
-if [ $1 -eq 0 ]; then
-	%{_sbindir}/texlive.post
-fi
-
-#-----------------------------------------------------------------------
-%files
-%{_texmfdistdir}/tex/latex/spot/spot.sty
-%doc %{_texmfdistdir}/doc/latex/spot/README
-%doc %{_texmfdistdir}/doc/latex/spot/spot.pdf
-#- source
-%doc %{_texmfdistdir}/source/latex/spot/spot.dtx
-%doc %{_texmfdistdir}/source/latex/spot/spot.ins
-
-#-----------------------------------------------------------------------
-%prep
-%setup -c -a1 -a2
-%autopatch -p1
-
-%build
-
-%install
-mkdir -p %{buildroot}%{_texmfdistdir}
-cp -fpar tex doc source %{buildroot}%{_texmfdistdir}
